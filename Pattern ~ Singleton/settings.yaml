@@ -1,0 +1,8 @@
+# settings.yaml
+database:
+  host: localhost
+  port: 5432
+  user: app
+  password: secret
+feature_flags:
+  new_checkout: true
