@@ -4,7 +4,7 @@
 ## Задание 1. Single Responsibility Principle (S)
 Ниже представлен класс OrderManager, который берет на себя слишком много обязанностей на нашей «киностудии»: он считает стоимость заказа, сохраняет его в базу данных и отправляет чек на email.
 ## Исходный код с нарушением:
-
+```py
 class OrderManager:
     def __init__(self, item_name, quantity, price):
         self.item_name = item_name
@@ -19,7 +19,7 @@ class OrderManager:
 
     def send_email_receipt(self):
         print(f"Отправка email... Чек за {self.item_name} отправлен покупателю.")
-
+```
 ## Ваша задача:
 
    1. Определите, сколько зон ответственности сейчас имеет класс OrderManager.
@@ -30,7 +30,7 @@ class OrderManager:
 Вам поручили расширить систему логирования на киноплощадке. Сейчас класс Logger умеет отправлять логи только в консоль. 
 Если завтра потребуется писать логи в файл или отправлять в Telegram, придется переписывать метод log.
 ## Исходный код с нарушением:
-
+```py
 class Logger:
     def log(self, message, format_type):
         if format_type == "console":
@@ -39,7 +39,7 @@ class Logger:
             # Представьте, что здесь логика записи в файл
             print(f"[File Log]: Запись в файл: {message}")
         # Если появится 'telegram', придется добавлять новый elif и менять этот класс!
-
+```
 ## Ваша задача:
 
    1. Сделайте систему открытой для расширения, но закрытой для изменения.
@@ -52,7 +52,7 @@ class Logger:
 В системе учета сотрудников киностудии есть базовый класс Worker. Однако при создании подкласса RobotAssistant (робота-помощника) 
 возникла проблема: роботы не получают зарплату на банковскую карту, из-за чего программа падает с ошибкой.
 ## Исходный код с нарушением:
-
+```py
 class Worker:
     def __init__(self, name):
         self.name = name
@@ -68,7 +68,7 @@ class RobotAssistant(Worker):
 def process_payroll(worker: Worker):
     # Эта функция ожидает, что подставив ЛЮБОГО Worker, код отработает без ошибок
     worker.pay_salary("4444-5555-6666-7777")
-
+```
 ## Ваша задача:
 
    1. Объясните, почему RobotAssistant нарушает контракт базового класса Worker.
@@ -79,7 +79,7 @@ def process_payroll(worker: Worker):
 Перед вами «толстый» интерфейс (протокол) SmartDevice, описывающий умную технику в павильонах киностудии. 
 Из-за этого обычная умная лампочка вынуждена реализовывать функции записи видео и проигрывания музыки.
 ## Исходный код с нарушением:
-
+```py
 from typing import Protocol
 class SmartDevice(Protocol):
     def turn_on(self): ...
@@ -99,7 +99,7 @@ class LightBulb:
         pass # Бессмысленный пустой метод
     def play_music(self):
         pass # Бессмысленный пустой метод
-
+```
 ## Ваша задача:
 
    1. Разделите один «толстый» интерфейс SmartDevice на три маленьких и специфичных (используя typing.Protocol).
@@ -109,7 +109,7 @@ class LightBulb:
 ## Задание 5. Dependency Inversion Principle (D)
 Высокоуровневый класс MovieDirector (Режиссер) жестко привязан к низкоуровневой детали — конкретной камере SonyCamera. Если камеру украдут или заменят на RedCamera, режиссер не сможет работать.
 ## Исходный код с нарушением:
-
+```py
 class SonyCamera:
     def capture(self):
         return "Запись видео в формате 4K на Sony"
@@ -120,7 +120,7 @@ class MovieDirector:
 
     def film_scene(self):
         print(f"Режиссер дает команду. {self.camera.capture()}")
-
+```
 ## Ваша задача:
 
    1. Избавьте класс MovieDirector от прямой зависимости от SonyCamera.
